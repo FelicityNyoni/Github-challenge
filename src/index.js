@@ -3,6 +3,16 @@ function search(event) {
   let searchInputElement = document.querySelector("#search-input");
   let cityElement = document.querySelector("#current-city");
   cityElement.innerHTML = searchInputElement.value;
+
+  let apiKey = "ab9dbat743ca61fc97fbb6cb364o3017";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${searchInputElement.value}&key=${apiKey}`;
+  axios.get(apiUrl).then(displayTemperature);
+}
+
+function displayTemperature(response) {
+  let temperature = Math.round(response.data.temperature.current);
+  let temperatureElement = document.querySelector(".current-temperature-value");
+  temperatureElement.innerHTML = `${temperature}`;
 }
 
 function formatDate(date) {
